@@ -1,4 +1,5 @@
 #include "ladder.h"
+#include <algorithm>  
 
 int main() {
     set<string> word_list;
@@ -10,8 +11,16 @@ int main() {
     cout << "Enter end word: ";
     cin >> end_word;
 
+    transform(start_word.begin(), start_word.end(), start_word.begin(), ::tolower);
+    transform(end_word.begin(), end_word.end(), end_word.begin(), ::tolower);
+
     if (start_word == end_word) {
-        cout << "Error: Start and end words must be different!" << endl;
+        cerr << "Error: Start and end words must be different!" << endl;
+        return 1;
+    }
+
+    if (word_list.find(end_word) == word_list.end()) {
+        cerr << "Error: End word '" << end_word << "' is not in the dictionary!" << endl;
         return 1;
     }
 

@@ -2,17 +2,26 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -Wextra -O2
 
-# Source and Object Files
-SOURCES = src/dijkstras.cpp src/dijkstras_main.cpp
-TARGET = dijkstras
+# Source Files
+SRC_DIR = src
+SOURCES_DIJKSTRA = $(SRC_DIR)/dijkstras.cpp $(SRC_DIR)/dijkstras_main.cpp
+SOURCES_LADDER = $(SRC_DIR)/ladder.cpp $(SRC_DIR)/ladder_main.cpp
 
-# Default Target
-all: $(TARGET)
+# Executables
+DIJKSTRA_EXE = dijkstras
+LADDER_EXE = ladder
 
-# Build Executable
-$(TARGET): $(SOURCES)
+# Default target - build both programs
+all: $(DIJKSTRA_EXE) $(LADDER_EXE)
+
+# Compile Dijkstra's Algorithm
+$(DIJKSTRA_EXE): $(SOURCES_DIJKSTRA)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-# Clean Build Files
+# Compile Word Ladder
+$(LADDER_EXE): $(SOURCES_LADDER)
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# Clean all build files
 clean:
-	rm -f $(TARGET)
+	rm -f $(DIJKSTRA_EXE) $(LADDER_EXE)
