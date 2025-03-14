@@ -49,6 +49,22 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     return {};
 }
 
+bool edit_distance_within(const std::string& str1, const std::string& str2, int d) {
+    int len1 = str1.size(), len2 = str2.size();
+    if (abs(len1 - len2) > d) return false;
+
+    int i = 0, j = 0, diff = 0;
+    while (i < len1 && j < len2) {
+        if (str1[i] != str2[j]) {
+            if (++diff > d) return false;
+            if (len1 > len2) i++;
+            else if (len1 < len2) j++;
+            else { i++; j++; }
+        } else { i++; j++; }
+    }
+    return true;
+}
+
 void load_words(set<string>& word_list, const string& file_name) {
     ifstream file(file_name);
     if (!file) {
