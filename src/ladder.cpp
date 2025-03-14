@@ -1,12 +1,10 @@
 #include "ladder.h"
 
-// Prints an error message and exits
 void error(string word1, string word2, string msg) {
     cerr << "Error: " << msg << " (" << word1 << " → " << word2 << ")" << endl;
     exit(1);
 }
 
-// Checks if two words are adjacent (edit distance of 1)
 bool is_adjacent(const string& word1, const string& word2) {
     int len1 = word1.size(), len2 = word2.size();
     if (abs(len1 - len2) > 1) return false;
@@ -15,15 +13,14 @@ bool is_adjacent(const string& word1, const string& word2) {
     while (i < len1 && j < len2) {
         if (word1[i] != word2[j]) {
             if (++diff > 1) return false;
-            if (len1 > len2) i++; // Deletion
-            else if (len1 < len2) j++; // Insertion
-            else { i++; j++; } // Substitution
+            if (len1 > len2) i++; 
+            else if (len1 < len2) j++;
+            else { i++; j++; }
         } else { i++; j++; }
     }
     return true;
 }
 
-// Generates the shortest word ladder using BFS
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list) {
     if (begin_word == end_word) return {begin_word};
 
@@ -52,7 +49,6 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
     return {};
 }
 
-// Loads words from a file into a set
 void load_words(set<string>& word_list, const string& file_name) {
     ifstream file(file_name);
     if (!file) {
@@ -65,7 +61,6 @@ void load_words(set<string>& word_list, const string& file_name) {
     }
 }
 
-// Prints a word ladder
 void print_word_ladder(const vector<string>& ladder) {
     if (ladder.empty()) {
         cout << "No word ladder found!" << endl;
@@ -76,7 +71,6 @@ void print_word_ladder(const vector<string>& ladder) {
     }
 }
 
-// Verifies correctness of some test cases
 void verify_word_ladder() {
     set<string> word_list;
     load_words(word_list, "words.txt");
