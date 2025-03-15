@@ -68,7 +68,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
 void load_words(set<string>& word_list, const string& file_name) {
     ifstream file(file_name);
     if (!file) {
-        cerr << "Error: Cannot open file " << file_name << endl;
+        cerr << "Cannot open file " << file_name << endl;
         exit(1);
     }
     string word;
@@ -82,7 +82,7 @@ void print_word_ladder(const vector<string>& ladder) {
         cout << "No word ladder found.\n"; 
         return;
     }
-    cout << "Word ladder found: ";
+    cout << "Word ladder: ";
     for (size_t i = 0; i < ladder.size(); ++i) {
         cout << ladder[i];
         if (i + 1 < ladder.size()) cout << " "; 
