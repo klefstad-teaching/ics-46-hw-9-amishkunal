@@ -4,12 +4,7 @@ int main() {
     string filename = "src/small.txt";
 
     Graph G;
-    try {
-        file_to_graph(filename, G);
-    } catch (const exception& e) {
-        cerr << e.what() << endl;
-        return 1;
-    }
+    file_to_graph(filename, G);
 
     int source = 0;
     vector<int> previous(G.numVertices, -1);
